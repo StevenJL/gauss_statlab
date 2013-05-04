@@ -31,6 +31,46 @@
   <div class="row-fluid">
     <div class="span6">
       <h4> Results </h4>
+
+      <table>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+        <tr>
+        <td>Sample Size:</td>
+        <td id="n"></td>
+        </tr>
+      </table>
+
         sample size: <div id="n"></div><br>
         min: <div id="min"></div><br>
         first quartile: <div id="first_qart"></div><br>
@@ -55,20 +95,6 @@
 
 <script>
 
-        // sample size: <div id="n"></div><br>
-        // min: <div id="min"></div><br>
-        // first quartile: <div id="first_qart"></div><br>
-        // mean: <div id="mean"></div><br>
-        // median: <div id="median"></div><br>
-        // third quartile: <div id="third_qart"></div><br>
-        // max: <div id="max"></div><br>
-        // sample std dev: <div id="s"></div><br>
-        // population std dev: <div id="sigma"></div><br>
-        // sample variance: <div id="samp_var"></div><br>
-        // popluation variance: <div id="pop_var"></div><br>
-        // sum of squares: <div id="ss"></div><br>
-        // kurtosis: <div id="kurt"></div><br>
-
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
     var input_data = $("#textarea").val()
@@ -78,34 +104,23 @@
       success: function(data){
         console.log(data)
         $("#n").html(data.size)
-        $("#min").html()
-        $("#first_qart").html()
-        $("#mean").html()
-        $("#median").html()
-        $("#third_qart").html()
-        $("#max").html()
-        $("#s").html()
-        $("#sigma").html()
-        $("#samp_var").html()
+        $("#min").html(data.min)
+        $("#first_qart").html(data.first_quartile)
+        $("#mean").html(data.mean)
+        $("#median").html(data.median)
+        $("#third_qart").html(data.third_quartile)
+        $("#max").html(data.max)
+        $("#s").html(data.sd)
+        $("#sigma").html(data.sigma)
+        $("#samp_var").html(data.variance_sam)
+        $("#pop_var").html(data.variance_pop)
+        $("#ss").html(data.ss)
+        $("#kurt").html(data.kurtosis)
       }
     })
-
     $(".leaderboard").slideDown()
   })
 
-    // output[:n] = vector.size
-    // output[:min] = vector.min
-    // output[:first_quartile] = vector.percentil(25)
-    // output[:mean] = vector.mean
-    // output[:median] = vector.median
-    // output[:third_quartile] = vector.percentil(75)
-    // output[:max] =  vector.max
-    // output[:s] = vector.sd
-    // output[:sigma] = vector.standard_deviation_population
-    // output[:variance_sam] = vector.variance
-    // output[:variance_pop] = vector.variance_population
-    // output[:ss] = vector.ss
-    // output[:kurtosis] = vector.kurtosis
 
 
 
