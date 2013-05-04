@@ -41,6 +41,6 @@ gem "twitter-bootstrap-rails"
 # gem 'capistrano'
 
 # To use debugger
-# gem 'debugger'
+gem 'debugger'
 
 gem 'statsample'
