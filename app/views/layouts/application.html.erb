@@ -1,14 +1,53 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>GaussLab</title>
+  <title>Gauss Laboratory</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
 </head>
 <body>
 
-<%= yield %>
+<div class="navbar navbar-fixed-top">  
+  <div class="navbar-inner">  
+      <ul class="nav">
+      <li><div style="padding: 10px;">Gauss Statistics Laboratory</div></li>
+      <li class="active" style="margin-left: 60px;"><%= link_to "Home", root_url %></li>
+      <li><%= link_to "About", about_url %></li>
+      <li><%= link_to "Contact", root_url %></li>  
+      </ul>  
+  </div>  
+</div> 
+
+
+<div class="container-fluid">  
+  <div class="row-fluid">
+    <div class="span3">  
+      <div class="well sidebar-nav">  
+        <ul class="nav nav-list">
+          <li><a href="#">About</a></li>    
+          <li class="nav-header">Basic</li>  
+          <li class="active"><%= link_to "Univariate Statistics", root_url %></li>  
+          <li><a href="#">HTML5</a></li>  
+          <li><a href="#">CSS</a></li>  
+          <li><a href="#">JavaScript</a></li>  
+          <li><a href="#">Twitter Bootstrap</a></li>  
+          <li><a href="#">Firebug</a></li>  
+          <li class="nav-header">Backend</li>  
+          <li><a href="#">PHP</a></li>  
+          <li><a href="#">SQL</a></li>  
+          <li><a href="#">MySQL</a></li>  
+          <li><a href="#">PostgreSQL</a></li>  
+          <li><a href="#">MongoDB</a></li>  
+       </ul>  
+      </div> 
+    </div> 
+    <div class="span9">
+      <%= yield %>
+    </div>
+
+  </div>
+</div>
 
 </body>
 </html>

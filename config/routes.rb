@@ -1,6 +1,7 @@
 GaussLab::Application.routes.draw do
 
-  root :to => "landing_page#index"
+  root :to => "univariates#show"
 
+  match 'about' => 'about#show'
 
 end
