@@ -4,8 +4,13 @@
       <fieldset>
         <div class="row offset1"><h4>Basic Univariate Statistics</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
-          Enter Data your data set by pasting it in the text field below <br>
-          or uploading a comma-delimited file. (Detailed Instructions)
+          <div class="span10">
+            Enter Data your data set by pasting it in the text field below
+            to compute basic univariate statistics on the data set 
+            (ie. mean, median, sd, quartiles, kurtosis, etc.)
+            <span class="stat-label">Instructions</span>
+          </div>
+          
         </div>   
         <div class="control-group">  
           <label class="control-label" for="textarea">Data Input</label>  
@@ -13,12 +18,12 @@
             <textarea class="input-xlarge" id="textarea" rows="3"></textarea>  
           </div>  
         </div>  
-        <div class="control-group">  
+<!--         <div class="control-group">  
           <label class="control-label" for="fileInput">File input</label>  
           <div class="controls">  
             <input class="input-file" id="fileInput" type="file">  
           </div>  
-        </div>  
+        </div>   -->
         <div class="form-actions">  
           <button type="button" class="btn btn-primary" id="compute-button">Compute</button>  
         </div>  
@@ -30,7 +35,6 @@
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span6">
-      (mouse over for computation details)
       <table>
         <tr><td class="stat-label">Sample Size:</td><td id="n"></td></tr>
         <tr><td class="stat-label">Min:</td><td id="min"></td></tr>
@@ -46,20 +50,6 @@
         <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
         <tr><td class="stat-label">Kurtosis:</td><td id="kurt"></td></tr>
       </table>
-
-<!--         sample size: <div id="n"></div><br>
-        min: <div id="min"></div><br>
-        first quartile: <div id="first_qart"></div><br>
-        mean: <div id="mean"></div><br>
-        median: <div id="median"></div><br>
-        third quartile: <div id="third_qart"></div><br>
-        max: <div id="max"></div><br>
-        sample std dev: <div id="s"></div><br>
-        population std dev: <div id="sigma"></div><br>
-        sample variance: <div id="samp_var"></div><br>
-        popluation variance: <div id="pop_var"></div><br>
-        sum of squares: <div id="ss"></div><br>
-        kurtosis: <div id="kurt"></div><br> -->
     </div>
     <div class="span6 graph">
 

@@ -8,5 +8,7 @@ td
 {
 font-weight: bold;
 text-align: right;
+text-decoration: underline;
+color: rgb(0,0,255);
 }
 
