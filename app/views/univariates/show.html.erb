@@ -66,13 +66,17 @@
 
     var input_data = $("#textarea").val()
 
-    var draw = function(histogramp) {
-      var canvas = $("<canvas id='myCanvas' width='500' height='300' style='border:1px solid #A9A9F5; border-radius: 1em; background-color: #FAFAFA;'></canvas>")
-      $('.graph').append(canvas)
-      var ctx = canvas.get(0).getContext("2d")
-      ctx.fillStyle = "rgb(200,0,0)";
-      ctx.fillRect (10, 10, 55, 50);
-    }
+    // var draw = function(hist) {
+    //   var canvas = $("<canvas id='myCanvas' width='500' height='300' style='border:1px solid #A9A9F5; border-radius: 1em; background-color: #FAFAFA;'></canvas>")
+    //   $('.graph').append(canvas)
+    //   var ctx = canvas.get(0).getContext("2d")
+    //   ctx.fillStyle = "#585858";
+    //   var scale = 20
+    //   for(i=0; i < hist.length; i++){
+    //     var diff = i * (hist[i].high - hist[i].low)* scale
+    //     ctx.fillRect(250 + diff, 150, (hist[i].high - hist[i].low) * scale, hist[i].value * scale)
+    //   }
+    // }
 
     $.ajax({
       url: '/univariate/compute',
@@ -91,8 +95,8 @@
         $("#pop_var").html(data.variance_pop.toFixed(3))
         $("#ss").html(data.ss.toFixed(3))
         $("#kurt").html(data.kurtosis.toFixed(3))
-        debugger
-        draw(data.histogram)
+        // $(".graph").empty()
+        // draw(data.histogram)
       }
     })
     $(".leaderboard").slideDown()
