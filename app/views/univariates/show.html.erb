@@ -34,7 +34,7 @@
 
 <div class="leaderboard results">  
   <div class="row-fluid">
-    <div class="span6">
+    <div class="span4">
       <table>
         <tr><td class="stat-label">Sample Size:</td><td id="n"></td></tr>
         <tr><td class="stat-label">Min:</td><td id="min"></td></tr>
@@ -52,7 +52,7 @@
       </table>
     </div>
     <div class="span6 graph">
-
+      
     </div>  
   </div>
 </div>
@@ -62,13 +62,22 @@
 
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
+    var canvas = $()
+
     var input_data = $("#textarea").val()
+
+    var draw = function(histogramp) {
+      var canvas = $("<canvas id='myCanvas' width='500' height='300' style='border:1px solid #A9A9F5; border-radius: 1em; background-color: #FAFAFA;'></canvas>")
+      $('.graph').append(canvas)
+      var ctx = canvas.get(0).getContext("2d")
+      ctx.fillStyle = "rgb(200,0,0)";
+      ctx.fillRect (10, 10, 55, 50);
+    }
+
     $.ajax({
       url: '/univariate/compute',
       data: { input_data: input_data },
       success: function(data){
-        debugger
-        console.log(data)
         $("#n").html(data.n)
         $("#min").html(data.min)
         $("#first_qart").html(data.first_quartile.toFixed(3))
@@ -82,14 +91,12 @@
         $("#pop_var").html(data.variance_pop.toFixed(3))
         $("#ss").html(data.ss.toFixed(3))
         $("#kurt").html(data.kurtosis.toFixed(3))
+        debugger
+        draw(data.histogram)
       }
     })
     $(".leaderboard").slideDown()
   })
-
-
-
-
 
 
 </script>

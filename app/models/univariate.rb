@@ -22,6 +22,7 @@ class Univariate
     output[:variance_pop] = vector.variance_population
     output[:ss] = vector.ss
     output[:kurtosis] = vector.kurtosis
+    output[:histogram] = vector.histogram
     output
   end
 
