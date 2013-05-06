@@ -1,0 +1,133 @@
+<div class="row-fluid">  
+  <div class="span12">
+    <form class="form-horizontal">  
+      <fieldset>
+        <div class="row offset1"><h4>Two Sample T-Test</h4></div>
+        <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
+          <div class="span10">
+            Enter the data sets
+            <span class="stat-label">Instructions</span>
+          </div>  
+        </div>   
+        <div class="control-group">  
+          <label class="control-label" for="textarea1">Sample 1</label>  
+          <div class="controls">  
+            <textarea class="input-xlarge" id="textarea1" rows="3"></textarea>  
+          </div>
+        </div>  
+        <div class="control-group">
+          <label class="control-label" for="textarea2">Sample 2</label>
+          <div class="controls">  
+            <textarea class="input-xlarge" id="textarea2" rows="3"></textarea>  
+          </div>
+        </div>
+        <div class="control-group">  
+          <label class="control-label" for="select01">Select Tail Type</label>  
+          <div class="controls">  
+            <select id="test_type">  
+            <option>Two Tail</option> 
+            <option>Left Tail</option> 
+            <option>Right Tail</option> 
+            </select>  
+          </div>  
+        </div>
+        <div class="control-group">  
+          <label class="control-label" for="select01">Assume  Equal Variances?</label>  
+          <div class="controls">  
+            <select id="equal_var">  
+            <option>Yes</option> 
+            <option>No</option>
+            </select>  
+          </div>  
+        </div>
+        <div class="form-actions">  
+          <button type="button" class="btn btn-primary" id="compute-button">Compute</button>  
+        </div>  
+      </fieldset>
+    </form> 
+  </div>
+</div>
+
+<div class="leaderboard results">  
+  <div class="row-fluid">
+    <div class="span4">
+      <table>
+        <tr><td class="stat-label">Sample 1 Size:</td><td id="n1"></td></tr>
+        <tr><td class="stat-label">Sample 2 Size:</td><td id="n2"></td></tr>
+        <!-- <tr><td class="stat-label">Min:</td><td id="min"></td></tr>
+        <tr><td class="stat-label">First Quartile:</td><td id="first_qart"></td></tr>
+        <tr><td class="stat-label">Mean:</td><td id="mean"></td></tr>
+        <tr><td class="stat-label">Median:</td><td id="median"></td></tr>
+        <tr><td class="stat-label">Third Quartile:</td><td id="third_qart"></td></tr>
+        <tr><td class="stat-label">Max:</td><td id="max"></td></tr>
+        <tr><td class="stat-label">Sample SD:</td><td id="s"></td></tr>
+        <tr><td class="stat-label">Pop. SD:</td><td id="sigma"></td></tr>
+        <tr><td class="stat-label">Sample Variance:</td><td id="samp_var"></td></tr>
+        <tr><td class="stat-label">Pop. Variance:</td><td id="pop_var"></td></tr>
+        <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
+        <tr><td class="stat-label">Kurtosis:</td><td id="kurt"></td></tr> -->
+      </table>
+    </div>
+    <div class="span6 graph">
+    </div>  
+  </div>
+</div>
+
+<script>
+  $(".leaderboard").hide()
+  $("#compute-button").on('click', function(){
+    var canvas = $()
+    var sample1 = $("#textarea1").val()
+    var sample2 = $("#textarea2").val()
+    var test_type = $('#test_type').val()
+    var equal_var = $('#equal_var').val()
+
+    // var draw = function() {
+    //   var canvas = $("<canvas id='myCanvas' width='500' height='300' style='border:1px solid #A9A9F5; border-radius: 1em; background-color: #FAFAFA;'></canvas>")
+    //   $('.graph').append(canvas)
+    //   var ctx = canvas.get(0).getContext("2d")   
+    //   ctx.translate(0,300)
+    //   ctx.scale(1,-1)
+    //   ctx.strokeStyle = "#000000";
+    //   var hor_range = hist[hist.length - 1].high - hist[0].low
+    //   var ver_range = 0
+    //   for(i=0; i< hist.length; i++){
+    //     if (hist[i].value > ver_range){
+    //       ver_range = hist[i].value
+    //     }
+    //   }
+    //   var hor_scale = 300.0 / hor_range
+    //   var ver_scale = 200.0 / ver_range
+    //   ctx.font = "bold 12px sans-serif"
+    //   for(i=0; i < hist.length; i++){
+    //     var diff = i * (hist[i].high - hist[i].low)* hor_scale
+    //     ctx.strokeRect(100 + diff, 250 - hist[i].value * ver_scale, (hist[i].high - hist[i].low) * hor_scale, hist[i].value*ver_scale)
+    //     ctx.fillText(hist[i].middle.toFixed(0), 100+diff, 270)
+    //   }
+    // }
+
+    $.ajax({
+      url: '/two_sample_test/compute',
+      data: { sample1: sample1, sample2: sample2, test_type: test_type, equal_var: equal_var },
+      success: function(data){
+        console.log(data)
+        // $("#n").html(data.n)
+        // $("#min").html(data.min)
+        // $("#first_qart").html(data.first_quartile.toFixed(3))
+        // $("#mean").html(data.mean.toFixed(3))
+        // $("#median").html(data.median.toFixed(3))
+        // $("#third_qart").html(data.third_quartile.toFixed(3))
+        // $("#max").html(data.max)
+        // $("#s").html(data.s.toFixed(3))
+        // $("#sigma").html(data.sigma.toFixed(3))
+        // $("#samp_var").html(data.variance_sam.toFixed(3))
+        // $("#pop_var").html(data.variance_pop.toFixed(3))
+        // $("#ss").html(data.ss.toFixed(3))
+        // $("#kurt").html(data.kurtosis.toFixed(3))
+        // $(".graph").empty()
+        // draw(data.histogram)
+      }
+    })
+    $(".leaderboard").slideDown()
+  })
+</script>

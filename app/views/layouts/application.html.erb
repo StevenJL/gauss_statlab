@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Gauss Laboratory</title>
+  <title>MATSTATLAB</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
   <%= csrf_meta_tags %>
@@ -11,33 +11,28 @@
 <div class="navbar navbar-fixed-top">  
   <div class="navbar-inner">  
       <ul class="nav">
-      <li><div style="padding: 10px;">Gauss Statistics Laboratory</div></li>
+      <li><div style="padding: 10px;">Math and Statistics Laboratory</div></li>
       <li class="active" style="margin-left: 60px;"><%= link_to "Home", root_url %></li>
       <li><%= link_to "About", about_url %></li>
       <li><%= link_to "Contact", root_url %></li>  
       </ul>  
   </div>  
-</div> 
-
-
+</div>
 <div class="container-fluid">  
   <div class="row-fluid">
     <div class="span2">  
       <div class="well sidebar-nav">  
         <ul class="nav nav-list">
-          <li class="nav-header">Basic</li>  
-          <li class="active"><%= link_to "Univariate Statistics", root_url %></li>
+          <li class="nav-header">Statistics</li>  
           <li><%= link_to "Univariate Statistics", root_url %></li>
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li class="nav-header">Advanced</li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
-          <li><%= link_to "Univariate Statistics", root_url %></li>  
+          <li><a href="/two_sample_test">Two Sample Tests</a></li>
+          <li><a href="/one_way_anovas">One Way ANOVA</a></li>
+          <li><a href="/confidence_intervals">Confidence Intervals</a></li>
+          <li><%= link_to "QQ-Plots", root_url %></li>
+          <li><%= link_to "Generalized Linear Models", root_url %></li>
+          <li class="nav-header">Linear Algebra</li>  
+          <li><%= link_to "Gram Schmidt Process", root_url %></li>
+          <li><%= link_to "Matrices", root_url %></li>
        </ul>  
       </div> 
     </div> 
@@ -47,6 +42,5 @@
 
   </div>
 </div>
-
 </body>
 </html>
