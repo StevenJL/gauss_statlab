@@ -65,6 +65,20 @@
 </div>
 
 <script>
+
+function iqr(k) {
+  return function(d, i) {
+    var q1 = d.quartiles[0],
+        q3 = d.quartiles[2],
+        iqr = (q3 - q1) * k,
+        i = -1,
+        j = d.length;
+    while (d[++i] < q1 - iqr);
+    while (d[--j] > q3 + iqr);
+    return [i, j];
+  };
+}
+
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
     var canvas = $()
@@ -72,9 +86,6 @@
     var sample2 = $("#textarea2").val()
     var test_type = $('#test_type').val()
     var equal_var = $('#equal_var').val()
-
-
-
 
     $.ajax({
       url: '/two_sample_test/compute',
@@ -86,19 +97,7 @@
         $("#t-stat").html(data.t.toFixed(3))
         $("#p-val").html(data.p.toFixed(3))
 
-        var function iqr(k) {
-              return function(d, i) {
-                var q1 = d.quartiles[0],
-                    q3 = d.quartiles[2],
-                    iqr = (q3 - q1) * k,
-                    i = -1,
-                    j = d.length;
-                while (d[++i] < q1 - iqr);
-                while (d[--j] > q3 + iqr);
-                return [i, j];
-              };
-            }
-
+        var rawdata = sample1.split(',')
 
         var margin = {top: 10, right: 50, bottom: 20, left: 50}
         var width = 120 - margin.left - margin.right
@@ -115,7 +114,7 @@
         chart.domain([min, max]);
 
         var svg = d3.select(".chart").selectAll("svg")
-              .data(data)
+              .data(rawdata)
             .enter().append("svg")
               .attr("class", "box")
               .attr("width", width + margin.left + margin.right)

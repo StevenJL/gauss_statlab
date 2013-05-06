@@ -15,7 +15,7 @@
         <div class="control-group">  
           <label class="control-label" for="textarea">Data Input</label>  
           <div class="controls">  
-            <textarea class="input-xlarge" id="textarea" rows="3"></textarea>  
+            <textarea class="input-xlarge" id="textarea" rows="3">1,2,3,4,4,5,6,6,7,7,7,6,6,6,7,7,8,6,9,9,0,9,8,7,6,6,6,5,7,8,9,7,6,5,4,3,3,5,4,5,5,6,7,6,8,3,7,6,5,5,6,8,5,4,4,3,3,5,4,5,5,6,7,6,8,3,7,6,5,5,6,8,5,4,4,3,3,5,4,5,5,6,7,6,8,3,7,6,5,5,6,8,5,4,4,3,3,5,4,5,5,6,7,6,8,3,7,6,5,5,6,8,5,4,4,3,3,5,4,5,5,6,7,6,8,3,7,6,5,5,6,8,5,4</textarea>  
           </div>  
         </div>
         <div class="form-actions">  
@@ -56,9 +56,9 @@
 
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
+    var input_data = $("#textarea").val()
     var canvas = $()
 
-    var input_data = $("#textarea").val()
 
     var draw = function(hist) {
       var canvas = $("<canvas id='myCanvas' width='500' height='300' style='border:1px solid #A9A9F5; border-radius: 1em; background-color: #FAFAFA;'></canvas>")
@@ -86,6 +86,34 @@
       }
     }
 
+    var draw2 = function(hist){
+      
+      var w = 500
+      var h = 300
+      var svg = d3.select('.graph')
+                    .append("svg")
+                    .attr("width", w)
+                    .attr("height", h);
+
+      var dataset = [];
+
+      for(i=0; i< hist.length; i++){
+          dataset.push(hist[i].value)
+      }
+      debugger
+      svg.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", function(d,i){
+          return i * (w / dataset.length)
+        })
+        .attr("y",0)
+        .attr("width", 20)
+        .attr("height", 100)                    
+
+    }
+
     $.ajax({
       url: '/univariate/compute',
       data: { input_data: input_data },
@@ -104,7 +132,7 @@
         $("#ss").html(data.ss.toFixed(3))
         $("#kurt").html(data.kurtosis.toFixed(3))
         $(".graph").empty()
-        draw(data.histogram)
+        draw2(data.histogram)
       }
     })
     $(".leaderboard").slideDown()

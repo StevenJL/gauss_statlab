@@ -46,23 +46,17 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.box {
-  font: 10px sans-serif;
+.bar rect {
+  fill: steelblue;
+  shape-rendering: crispEdges;
 }
 
-.box line,
-.box rect,
-.box circle {
+.bar text {
   fill: #fff;
-  stroke: #000;
-  stroke-width: 1.5px;
 }
 
-.box .center {
-  stroke-dasharray: 3,3;
-}
-
-.box .outlier {
+.axis path, .axis line {
   fill: none;
-  stroke: #ccc;
+  stroke: #000;
+  shape-rendering: crispEdges;
 }
