@@ -53,19 +53,10 @@
     <div class="span4">
       <table>
         <tr><td class="stat-label">Sample 1 Size:</td><td id="n1"></td></tr>
-        <tr><td class="stat-label">Sample 2 Size:</td><td id="n2"></td></tr>
-        <!-- <tr><td class="stat-label">Min:</td><td id="min"></td></tr>
-        <tr><td class="stat-label">First Quartile:</td><td id="first_qart"></td></tr>
-        <tr><td class="stat-label">Mean:</td><td id="mean"></td></tr>
-        <tr><td class="stat-label">Median:</td><td id="median"></td></tr>
-        <tr><td class="stat-label">Third Quartile:</td><td id="third_qart"></td></tr>
-        <tr><td class="stat-label">Max:</td><td id="max"></td></tr>
-        <tr><td class="stat-label">Sample SD:</td><td id="s"></td></tr>
-        <tr><td class="stat-label">Pop. SD:</td><td id="sigma"></td></tr>
-        <tr><td class="stat-label">Sample Variance:</td><td id="samp_var"></td></tr>
-        <tr><td class="stat-label">Pop. Variance:</td><td id="pop_var"></td></tr>
-        <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
-        <tr><td class="stat-label">Kurtosis:</td><td id="kurt"></td></tr> -->
+        <tr><td class="stat-label">Sample 2 Size:</td><td id="n2"></td></tr>      
+        <tr><td class="stat-label">Degrees of Freedom:</td><td id="df"></td></tr>
+        <tr><td class="stat-label">T Test-Statistic:</td><td id="t-stat"></td></tr>
+        <tr><td class="stat-label">P-Value:</td><td id="p-val"></td></tr>
       </table>
     </div>
     <div class="span6 graph">
@@ -110,21 +101,14 @@
       url: '/two_sample_test/compute',
       data: { sample1: sample1, sample2: sample2, test_type: test_type, equal_var: equal_var },
       success: function(data){
-        console.log(data)
-        // $("#n").html(data.n)
-        // $("#min").html(data.min)
-        // $("#first_qart").html(data.first_quartile.toFixed(3))
-        // $("#mean").html(data.mean.toFixed(3))
-        // $("#median").html(data.median.toFixed(3))
-        // $("#third_qart").html(data.third_quartile.toFixed(3))
-        // $("#max").html(data.max)
-        // $("#s").html(data.s.toFixed(3))
-        // $("#sigma").html(data.sigma.toFixed(3))
-        // $("#samp_var").html(data.variance_sam.toFixed(3))
-        // $("#pop_var").html(data.variance_pop.toFixed(3))
-        // $("#ss").html(data.ss.toFixed(3))
-        // $("#kurt").html(data.kurtosis.toFixed(3))
-        // $(".graph").empty()
+        $("#n1").html(data.n1)
+        $("#n2").html(data.n2)
+        $("#df").html(data.df)
+        $("#t-stat").html(data.t.toFixed(3))
+        $("#p-val").html(data.p.toFixed(3))
+
+
+
         // draw(data.histogram)
       }
     })
