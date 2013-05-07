@@ -1,1 +1,135 @@
-You arrived!
+<div class="row-fluid">  
+  <div class="span12">
+    <form class="form-horizontal">  
+      <fieldset>
+        <div class="row offset1"><h4>Univariate Statistics</h4></div>
+        <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
+          <div class="span10">
+            Enter you data in the fields below.  You can also add groups with the "add group" button.
+            <span class="stat-label">Instructions</span>
+          </div>          
+        </div>   
+        <div class="control-group">  
+          <label class="control-label" for="textarea">Data Input</label>
+          <div class="controls">  
+            <textarea class="input-xlarge" id="textarea" rows="3">98, 82, 119, 74, 130, 108, 117, 68, 112, 107, 101, 70, 79, 100, 135, 114, 109, 106, 115, 95, 107, 100, 88, 76, 90, 97, 98, 143, 92, 95, 92, 91, 110, 90, 83, 87, 120, 125, 114, 96, 79, 128, 109, 91, 97, 80, 91, 108, 72, 82, 113, 101, 83, 97, 119, 63, 92, 77, 109, 100, 117, 89, 114, 123, 106, 112, 83, 118, 92, 127, 77, 77, 99, 85, 101, 108, 103, 94, 120, 62, 109, 117, 113, 90, 80, 90, 71, 101, 124, 92, 112, 108, 106, 98, 112, 85, 72, 123, 116, 74</textarea>
+          </div>  
+        </div>
+        <div class="form-actions">  
+          <button type="button" class="btn btn-primary" id="compute-button">Add More Fields</button>  
+        </div>  
+        <div class="form-actions">  
+          <button type="button" class="btn btn-primary" id="compute-button">Compute</button>  
+        </div>  
+      </fieldset>  
+    </form> 
+  </div>
+</div>
+
+<div class="leaderboard results">  
+  <div class="row-fluid">
+    <div class="span4">
+      <table>
+        <tr><td class="stat-label">Sample Size:</td><td id="n"></td></tr>
+        <tr><td class="stat-label">Min:</td><td id="min"></td></tr>
+        <tr><td class="stat-label">First Quartile:</td><td id="first_qart"></td></tr>
+        <tr><td class="stat-label">Mean:</td><td id="mean"></td></tr>
+        <tr><td class="stat-label">Median:</td><td id="median"></td></tr>
+        <tr><td class="stat-label">Third Quartile:</td><td id="third_qart"></td></tr>
+        <tr><td class="stat-label">Max:</td><td id="max"></td></tr>
+        <tr><td class="stat-label">Sample SD:</td><td id="s"></td></tr>
+        <tr><td class="stat-label">Pop. SD:</td><td id="sigma"></td></tr>
+        <tr><td class="stat-label">Sample Variance:</td><td id="samp_var"></td></tr>
+        <tr><td class="stat-label">Pop. Variance:</td><td id="pop_var"></td></tr>
+        <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
+        <tr><td class="stat-label">Kurtosis:</td><td id="kurt"></td></tr>
+      </table>
+    </div>
+    <div class="span6 graph" style="padding: 20px;">
+      
+    </div>  
+  </div>
+</div>
+
+
+<script>
+
+  $(".leaderboard").hide()
+  $("#compute-button").on('click', function(){
+    var input_data = $("#textarea").val()
+
+    var draw = function(hist_values, hist_interval){
+      // debugger
+      var dataset = hist_values
+      var axis = hist_interval
+      for(i=0;i<axis.length;i++){
+        axis[i]=axis[i].toFixed(0)
+      }
+      var w = 500
+      var h = 200
+      var barPadding = 1;
+      var svg = d3.select('.graph')
+                    .append("svg")
+                    .attr("fill", "teal")
+                    .attr("width", w)
+                    .attr("height", h);
+      // debugger      
+      svg.selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("x", function(d,i){
+          return i * (w / dataset.length)
+        })
+        .attr("y", function(d){
+          return h - d * 4
+        })
+        .attr("width", w / dataset.length - barPadding)
+        .attr("height", function(d){
+          return d * 4;
+        })
+
+      var svg2 = d3.select('.graph')
+                    .append("svg")
+                    .attr("width", 500)
+                    .attr("height", 50);
+
+      // debugger
+      svg2.selectAll("text")                   
+        .data(axis)
+        .enter()
+        .append("text")
+        .text(function(d){
+          return d
+        })
+        .attr("x", function(d, i){
+          return i * (w / axis.length) + 20;
+        })
+        .attr("y", 25);
+
+    }
+
+    $.ajax({
+      url: '/univariate/compute',
+      data: { input_data: input_data },
+      success: function(data){
+        $("#n").html(data.n)
+        $("#min").html(data.min)
+        $("#first_qart").html(data.first_quartile.toFixed(3))
+        $("#mean").html(data.mean.toFixed(3))
+        $("#median").html(data.median.toFixed(3))
+        $("#third_qart").html(data.third_quartile.toFixed(3))
+        $("#max").html(data.max)
+        $("#s").html(data.s.toFixed(3))
+        $("#sigma").html(data.sigma.toFixed(3))
+        $("#samp_var").html(data.variance_sam.toFixed(3))
+        $("#pop_var").html(data.variance_pop.toFixed(3))
+        $("#ss").html(data.ss.toFixed(3))
+        $("#kurt").html(data.kurtosis.toFixed(3))
+        $(".graph").empty()
+        draw(data.histogram_values, data.histogram_intervals)
+      }
+    })
+    $(".leaderboard").slideDown()
+  })
+</script>

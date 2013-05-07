@@ -16,4 +16,8 @@ GaussLab::Application.routes.draw do
 
   match "/one_way_anovas" => "one_way_anovas#show"
 
+  match "/one_way_anovas/compute" => "one_way_anovas#compute"
+
+  match "/chisquares" => "chisquares#show"
+
 end
