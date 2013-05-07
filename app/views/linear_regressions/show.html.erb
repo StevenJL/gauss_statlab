@@ -2,7 +2,7 @@
   <div class="row-fluid">
     <div class="span4">
       <table>
-<!--         <tr><td class="stat-label">Sample 1 Size:</td><td id="n1"></td></tr>
+<!--    <tr><td class="stat-label">Sample 1 Size:</td><td id="n1"></td></tr>
         <tr><td class="stat-label">Sample 2 Size:</td><td id="n2"></td></tr>      
         <tr><td class="stat-label">Degrees of Freedom:</td><td id="df"></td></tr>
         <tr><td class="stat-label">T Test-Statistic:</td><td id="t-stat"></td></tr>
@@ -14,9 +14,9 @@
   </div>
 </div>
 
-  <div class="form-actions">  
-    <button type="button" class="btn btn-primary" id="compute-button">Compute</button>  
-  </div>  
+<div class="form-actions">  
+  <button type="button" class="btn btn-primary" id="compute-button">Compute</button>
+</div>  
 
 <div class="row-fluid">  
   <div class="span12">
@@ -32,156 +32,110 @@
         <div class="control-group">  
           <label class="control-label" for="textarea1">Response Values</label>  
           <div class="controls">  
-            <textarea class="input-xlarge" id="textarea1" rows="3"></textarea>  
+            <textarea class="input-xlarge" id="textarea1" rows="3">1,2,3,4,5,6,7,8,9</textarea>  
           </div>
         </div>  
         <div class="control-group">
           <label class="control-label" for="textarea2">Predictor Values</label>
           <div class="controls">  
-            <textarea class="input-xlarge" id="textarea2" rows="3"></textarea>  
+            <textarea class="input-xlarge" id="textarea2" rows="3">4,5,6,7,8,9,10,11,12</textarea>  
           </div>
-        </div>
-        <div class="control-group">  
-          <label class="control-label" for="select01">Select Tail Type</label>  
-          <div class="controls">  
-            <select id="test_type">  
-            <option>Two Tail</option> 
-            <option>Left Tail</option> 
-            <option>Right Tail</option> 
-            </select>  
-          </div>  
-        </div>
-        <div class="control-group">  
-          <label class="control-label" for="select01">Assume  Equal Variances?</label>  
-          <div class="controls">  
-            <select id="equal_var">  
-            <option>Yes</option> 
-            <option>No</option>
-            </select>  
-          </div>  
         </div>
       </fieldset>
     </form> 
   </div>
 </div>
 
-
-
 <script>
-
 
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
-    var canvas = $()
-    var sample1 = $("#textarea1").val()
-    var sample2 = $("#textarea2").val()
-    var test_type = $('#test_type').val()
-    var equal_var = $('#equal_var').val()
 
-    var draw = function(hist1_values, hist1_intervals, hist2_values, hist2_intervals){
-  
-      var dataset1 = hist1_values
-      var axis1 = hist1_intervals
-      var dataset2 = hist2_values
-      var axis2 = hist2_intervals
-      for(i=0;i<axis1.length;i++){
-        axis1[i]=axis1[i].toFixed(0)
-      }
-      for(i=0;i<axis2.length;i++){
-        axis2[i]=axis2[i].toFixed(0)
-      }
-      var w = 300
-      var h = 100
-      var barPadding = 1;
-      var svg = d3.select('.graph')
-                    .append("svg")
-                    .attr("fill", "teal")
-                    .attr("width", w)
-                    .attr("height", h);
-      // debugger      
-      svg.selectAll("rect")
-        .data(dataset1)
-        .enter()
-        .append("rect")
-        .attr("x", function(d,i){
-          return i * (w / dataset1.length)
-        })
-        .attr("y", function(d){
-          return h - d * 4
-        })
-        .attr("width", w / dataset1.length - barPadding)
-        .attr("height", function(d){
-          return d * 4;
-        })
+    $(".graph").empty()
 
-      // var svg2 = d3.select('.graph')
-      //               .append("svg")
-      //               .attr("width", 500)
-      //               .attr("height", 50);
+    var response = $("#textarea1").val().split(',')
+    var predictor = $("#textarea2").val().split(',')
 
+    var draw = function(){
       // debugger
-      // svg2.selectAll("text")                   
-      //   .data(axis1)
-      //   .enter()
-      //   .append("text")
-      //   .text(function(d){
-      //     return d
-      //   })
-      //   .attr("x", function(d, i){
-      //     return i * (w / axis1.length) + 20;
-      //   })
-      //   .attr("y", 25);
+      //Width and height
+      var w = 500;
+      var h = 300;
+      var padding = 30;
 
-      var svg3 = d3.select('.graph')
-                    .append("svg")
-                    .attr("fill", "red")
-                    .attr("width", w)
-                    .attr("height", h);
-
-      svg3.selectAll("rect")
-        .data(dataset2)
-        .enter()
-        .append("rect")
-        .attr("x", function(d,i){
-          return i * (w / dataset2.length)
-        })
-        .attr("y", 0)
-        .attr("width", w / dataset2.length - barPadding)
-        .attr("height", function(d){
-          return d * 4;
-        })
-
-      var svg4 = d3.select('.graph')
-                    .append("svg")
-                    .attr("width", 500)
-                    .attr("height", 50);
-
+      var dataset = [];                   
+      var numDataPoints = response.length;              
+      for (var i = 0; i < numDataPoints; i++) {                
+          dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]);              
+      }
       // debugger
-      svg4.selectAll("text")                   
-        .data(axis2)
-        .enter()
-        .append("text")
-        .text(function(d){
-          return d
-        })
-        .attr("x", function(d, i){
-          return i * (w / axis2.length) + 20;
-        })
-        .attr("y", 25);
+
+      //Create scale functions
+      var xScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset, function(d) { return d[0]; })])
+                           .range([padding, w - padding * 2]);
+
+      var yScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+                           .range([h - padding, padding]);
+
+      var rScale = d3.scale.linear()
+                           .domain([0, d3.max(dataset, function(d) { return d[1]; })])
+                           .range([2, 5]);
+
+      //Define X axis
+      var xAxis = d3.svg.axis()
+                        .scale(xScale)
+                        .orient("bottom")
+                        .ticks(5);
+
+      //Define Y axis
+      var yAxis = d3.svg.axis()
+                        .scale(yScale)
+                        .orient("left")
+                        .ticks(5);
+
+      //Create SVG element
+      var svg = d3.select(".graph")
+                  .append("svg")
+                  .attr("width", w)
+                  .attr("height", h);
+
+      //Create circles
+      svg.selectAll("circle")
+         .data(dataset)
+         .enter()
+         .append("circle")
+         .attr("cx", function(d) {
+              return xScale(d[0]);
+         })
+         .attr("cy", function(d) {
+              return yScale(d[1]);
+         })
+         .attr("r", 3);
+      
+      //Create X axis
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(0," + (h - padding) + ")")
+          .call(xAxis);
+      
+      //Create Y axis
+      svg.append("g")
+          .attr("class", "axis")
+          .attr("transform", "translate(" + padding + ",0)")
+          .call(yAxis);
+
     }
 
     $.ajax({
       url: '/two_sample_test/compute',
-      data: { sample1: sample1, sample2: sample2, test_type: test_type, equal_var: equal_var },
+      data: { },
       success: function(data){
-        $("#n1").html(data.n1)
-        $("#n2").html(data.n2)
-        $("#df").html(data.df)
-        $("#t-stat").html(data.t.toFixed(3))
-        $("#p-val").html(data.p.toFixed(3))
-        draw(data.histogram1_values, data.histogram1_intervals, data.histogram2_values, data.histogram2_intervals)        
+        draw()        
       }
     })
+
     $(".leaderboard").slideDown()
   })
 </script>
