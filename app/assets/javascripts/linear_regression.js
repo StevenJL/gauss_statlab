@@ -13,43 +13,49 @@ $(document).ready(function(){
     for (var i = 0; i < numDataPoints; i++) {                
         dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]); }    
 
-    var draw = function(dataset){
-      // debugger
-      //Width and height
+    var draw = function(dataset, a, b){
+
+      var a = parseFloat(a);
+      var b = parseFloat(b);
       var w = 370;
       var h = 300;
       var padding = 30;
 
-      // debugger
+      var min = d3.min(dataset, function(d) { return d[0]; })
+      var max = d3.max(dataset, function(d) { return d[0]; })
 
-      //Create scale functions
       var xScale = d3.scale.linear()
-                           .domain([ d3.min(dataset, function(d) { return d[0]; }) , d3.max(dataset, function(d) { return d[0]; }) ])
+                           .domain([ min , max ])
                            .range([padding, w - padding * 2]);
 
       var yScale = d3.scale.linear()
                            .domain([ d3.min(dataset, function(d) { return d[1]; }) , d3.max(dataset, function(d) { return d[1]; }) ])
                            .range([h - padding, padding]);
 
-      //Define X axis
       var xAxis = d3.svg.axis()
                         .scale(xScale)
                         .orient("bottom")
                         .ticks(5);
 
-      //Define Y axis
       var yAxis = d3.svg.axis()
                         .scale(yScale)
                         .orient("left")
                         .ticks(5);
 
-      //Create SVG element
       var svg = d3.select(".graph")
                   .append("svg")
                   .attr("width", w)
                   .attr("height", h);
 
-      //Create circles
+      svg.append("line")
+        .attr("x1", xScale(min))
+        .attr("y1", yScale(a + min*b))
+        .attr("x2", xScale(max))
+        .attr("y2", yScale(a + max*b))
+        .attr("stroke-width", 3)
+        .style("stroke", "rgb(201,2,2)");
+
+
       svg.selectAll("circle")
          .data(dataset)
          .enter()
@@ -62,12 +68,6 @@ $(document).ready(function(){
          })
          .attr("r", 3);
 
-      svg.append("line")
-        .attr("x1", xScale(0))
-        .attr("y1", yScale(0))
-        .attr("x2", xScale(60))
-        .attr("y2", yScale(20))
-        .style("stroke", "rgb(6,120,155)");
 
       //Create X axis
       svg.append("g")
@@ -92,7 +92,7 @@ $(document).ready(function(){
         var b = results.b.toFixed(2)
         $("#reg_line").html("y = "+a+" + "+b+"x")
         $("#corr").html(results.r.toFixed(2))
-        draw(dataset)
+        draw(dataset, a, b)
         $("#predict-button").on("click",function(){
           var x_to_predict = $("#x_value").val()
           x_to_predict = parseFloat(x_to_predict)
