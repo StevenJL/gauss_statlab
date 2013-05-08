@@ -117,7 +117,29 @@
               return yScale(d[1]);
          })
          .attr("r", 3);
+
+      var line = d3.svg.line()
+                  .x(function(d) { return xScale(d); })
+                  .y(function(d) { return yScale(d); });
+
+      // svg.append("line")
+      //     .x(function() { return xScale(x); })
+      //     .y(function() { return yScale(y); })
+      //   .attr("x1", 0)
+      //   .attr("y1", 0)
+      //   .attr("x2", 60)
+      //   .attr("y2", 20)
+      //   .style("stroke", "rgb(6,120,155)");
+
+      var data = [[0,0],[60,20]]
       
+      debugger
+
+      svg.append("path")
+          .datum(data)
+          .attr("class", "line")
+          .attr("d", line);
+
       //Create X axis
       svg.append("g")
           .attr("class", "axis")
@@ -129,6 +151,8 @@
           .attr("class", "axis")
           .attr("transform", "translate(" + padding + ",0)")
           .call(yAxis);
+
+
     }
 
     $.ajax({
@@ -141,7 +165,6 @@
         $("#corr").html(results.r.toFixed(2))
         draw(dataset)
         $("#predict-button").on("click",function(){
-          debugger
           var x_to_predict = $("#x_value").val()
           x_to_predict = parseFloat(x_to_predict)
           var y_predicted = a + b * x_to_predict
