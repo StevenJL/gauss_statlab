@@ -14,6 +14,8 @@ GaussLab::Application.routes.draw do
 
   match "/linear_regressions" => "linear_regressions#show"
 
+  match "/linear_regressions/compute" => "linear_regressions#compute"
+
   match "/one_way_anovas" => "one_way_anovas#show"
 
   match "/one_way_anovas/compute" => "one_way_anovas#compute"
