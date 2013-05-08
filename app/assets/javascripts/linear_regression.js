@@ -23,7 +23,6 @@ $(document).ready(function(){
 
       var min = d3.min(dataset, function(d) { return d[0]; })
       var max = d3.max(dataset, function(d) { return d[0]; })
-
       var xScale = d3.scale.linear()
                            .domain([ min , max ])
                            .range([padding, w - padding * 2]);

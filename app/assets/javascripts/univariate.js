@@ -1,19 +1,36 @@
 $(document).ready(function(){
 
-  $(".leaderboard").hide()
+  // $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
     var input_data = $("#textarea").val()
 
     var draw = function(hist_values, hist_interval){
 
-      var dataset = hist_values
-      var axis = hist_interval
-      for(i=0;i<axis.length;i++){
-        axis[i]=axis[i].toFixed(0)
+      var min = hist_interval[0]
+      var max = hist_interval[0]
+
+      for(i = 0; i < hist_interval.length; i++){
+        if(hist_interval[i] < min){
+          min = hist_interval[i]
+        }
+        if (hist_interval[i]>max){
+          max = hist_interval[i]
+        }
       }
-      var w = 300
-      var h = 200
+
+      var dataset = hist_values;
+      var range = max - min;
+      var tick_width = range / 7.0;
+      var axis = [];
+      for(i=0 ;i<8 ;i++){
+        axis.push((min + i * tick_width).toFixed(0) )
+      }
+
+      var w = 300;
+      var h = 200;
       var barPadding = 1;
+      var padding = 5;
+
       var svg = d3.select('.graph')
                     .append("svg")
                     .attr("fill", "teal")
@@ -37,8 +54,10 @@ $(document).ready(function(){
 
       var svg2 = d3.select('.graph')
                     .append("svg")
-                    .attr("width", 500)
-                    .attr("height", 50);
+                    .attr("width", 300)
+                    .attr("height", 25);
+
+      // debugger
 
       svg2.selectAll("text")                   
         .data(axis)
@@ -48,10 +67,9 @@ $(document).ready(function(){
           return d
         })
         .attr("x", function(d, i){
-          return i * (w / axis.length) + 20;
+          return i *  (300 / 7) ;
         })
-        .attr("y", 25);
-
+        .attr("y", 25);  
     }
 
     $.ajax({
@@ -75,7 +93,7 @@ $(document).ready(function(){
         draw(data.histogram_values, data.histogram_intervals)
       }
     })
-    $(".leaderboard").slideDown()
+    // $(".leaderboard").slideDown()
   })
 
 })

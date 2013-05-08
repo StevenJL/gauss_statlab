@@ -35,12 +35,14 @@ class Univariate
     max = input_data.max
     range = max - min
     width = range / bins.to_f
+    
     (bins+1).times do |i|
       lower = min - (width/2.0) + width*i 
       upper = min + (width/2.0) + width*i
       freq = input_data.count{|num| num >= lower && num < upper } / n.to_f
       output[ (lower + upper) / 2.0] = (freq * 200).round
     end
+    
     output
   end
 
