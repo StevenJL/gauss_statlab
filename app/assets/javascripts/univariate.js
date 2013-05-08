@@ -5,7 +5,7 @@ $(document).ready(function(){
     var input_data = $("#textarea").val()
 
     var draw = function(hist_values, hist_interval){
-      // debugger
+
       var dataset = hist_values
       var axis = hist_interval
       for(i=0;i<axis.length;i++){
@@ -19,7 +19,7 @@ $(document).ready(function(){
                     .attr("fill", "teal")
                     .attr("width", w)
                     .attr("height", h);
-      // debugger      
+ 
       svg.selectAll("rect")
         .data(dataset)
         .enter()
@@ -40,7 +40,6 @@ $(document).ready(function(){
                     .attr("width", 500)
                     .attr("height", 50);
 
-      // debugger
       svg2.selectAll("text")                   
         .data(axis)
         .enter()

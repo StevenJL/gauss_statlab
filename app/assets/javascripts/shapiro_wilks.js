@@ -7,7 +7,7 @@ $(document).ready(function(){
     for(i=0;i<input_data.length;i++){
       input_data_num.push(parseFloat(input_data[i]))
     }
-    debugger
+    // debugger
 
     $('.graph').empty()
 
