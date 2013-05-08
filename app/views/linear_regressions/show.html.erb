@@ -118,27 +118,12 @@
          })
          .attr("r", 3);
 
-      var line = d3.svg.line()
-                  .x(function(d) { return xScale(d); })
-                  .y(function(d) { return yScale(d); });
-
-      // svg.append("line")
-      //     .x(function() { return xScale(x); })
-      //     .y(function() { return yScale(y); })
-      //   .attr("x1", 0)
-      //   .attr("y1", 0)
-      //   .attr("x2", 60)
-      //   .attr("y2", 20)
-      //   .style("stroke", "rgb(6,120,155)");
-
-      var data = [[0,0],[60,20]]
-      
-      debugger
-
-      svg.append("path")
-          .datum(data)
-          .attr("class", "line")
-          .attr("d", line);
+      svg.append("line")
+        .attr("x1", xScale(0))
+        .attr("y1", yScale(0))
+        .attr("x2", xScale(60))
+        .attr("y2", yScale(20))
+        .style("stroke", "rgb(6,120,155)");
 
       //Create X axis
       svg.append("g")
