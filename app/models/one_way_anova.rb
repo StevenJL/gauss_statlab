@@ -2,6 +2,7 @@ class OneWayAnova
 
   def convert_to_float(array)
     output_array = []
+    # array.map(&:to_f)
     array.each {|num| output_array << num.to_f}
     output_array
   end

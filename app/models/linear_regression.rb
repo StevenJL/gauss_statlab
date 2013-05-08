@@ -12,6 +12,9 @@ class LinearRegression
   def get_results
     output = {}
     sr = Statsample::Regression.simple(@dataset[0].to_scale, @dataset[1].to_scale)
+    # [:a, :b, :r].each do |sym|
+    #   output[sym] = sr.send(sym)
+    # end
     output[:a] = sr.a
     output[:b] = sr.b
     output[:r] = sr.r

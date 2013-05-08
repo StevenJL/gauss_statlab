@@ -9,17 +9,29 @@ $(document).ready(function(){
     var equal_var = $('#equal_var').val()
 
     var draw = function(hist1_values, hist1_intervals, hist2_values, hist2_intervals){
-  
+
+      var min = hist1_intervals[0]
+      var max = hist1_intervals[0]
+
+      for(i = 0; i < hist1_intervals.length; i++){
+        if(hist1_intervals[i] < min){
+          min = hist1_intervals[i]
+        }
+        if (hist1_intervals[i]>max){
+          max = hist1_intervals[i]
+        }
+      }
+
+      var range = max - min;
+      var tick_width = range / 7.0;
+      var axis = [];
+      for(i=0 ;i<8 ;i++){
+        axis.push((min + i * tick_width).toFixed(0) )
+      }
+
       var dataset1 = hist1_values
-      var axis1 = hist1_intervals
       var dataset2 = hist2_values
-      var axis2 = hist2_intervals
-      for(i=0;i<axis1.length;i++){
-        axis1[i]=axis1[i].toFixed(0)
-      }
-      for(i=0;i<axis2.length;i++){
-        axis2[i]=axis2[i].toFixed(0)
-      }
+
       var w = 300
       var h = 100
       var barPadding = 1;
@@ -28,7 +40,7 @@ $(document).ready(function(){
                     .attr("fill", "teal")
                     .attr("width", w)
                     .attr("height", h);
-      // debugger      
+   
       svg.selectAll("rect")
         .data(dataset1)
         .enter()
@@ -44,23 +56,23 @@ $(document).ready(function(){
           return d * 4;
         })
 
-      // var svg2 = d3.select('.graph')
-      //               .append("svg")
-      //               .attr("width", 500)
-      //               .attr("height", 50);
+      var svg4 = d3.select('.graph')
+                    .append("svg")
+                    .attr("width", 300)
+                    .attr("height", 25);
 
-      // debugger
-      // svg2.selectAll("text")                   
-      //   .data(axis1)
-      //   .enter()
-      //   .append("text")
-      //   .text(function(d){
-      //     return d
-      //   })
-      //   .attr("x", function(d, i){
-      //     return i * (w / axis1.length) + 20;
-      //   })
-      //   .attr("y", 25);
+      svg4.selectAll("text")                   
+        .data(axis)
+        .enter()
+        .append("text")
+        .text(function(d){
+          return d
+        })
+        .attr("x", function(d, i){
+          return i *  (300 / 7) ;
+        })
+        .attr("y", 25);  
+    
 
       var svg3 = d3.select('.graph')
                     .append("svg")
@@ -81,24 +93,8 @@ $(document).ready(function(){
           return d * 4;
         })
 
-      var svg4 = d3.select('.graph')
-                    .append("svg")
-                    .attr("width", 500)
-                    .attr("height", 50);
-
-      // debugger
-      svg4.selectAll("text")                   
-        .data(axis2)
-        .enter()
-        .append("text")
-        .text(function(d){
-          return d
-        })
-        .attr("x", function(d, i){
-          return i * (w / axis2.length) + 20;
-        })
-        .attr("y", 25);
     }
+
 
     $.ajax({
       url: '/two_sample_test/compute',

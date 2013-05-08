@@ -11,7 +11,7 @@ $(document).ready(function(){
     var dataset = [];                   
     var numDataPoints = response.length;              
     for (var i = 0; i < numDataPoints; i++) {                
-        dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]); }    
+        dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]); }
 
     var draw = function(dataset, a, b){
 
@@ -95,8 +95,8 @@ $(document).ready(function(){
         $("#predict-button").on("click",function(){
           var x_to_predict = $("#x_value").val()
           x_to_predict = parseFloat(x_to_predict)
-          var y_predicted = a + b * x_to_predict
-          $("#predicted_y").html(y_predicted)
+          var y_predicted = parseFloat(a) + parseFloat(b) * x_to_predict
+          $("#predicted_y").html(y_predicted.toFixed(2))
         })
       }
     })

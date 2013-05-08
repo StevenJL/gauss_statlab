@@ -71,9 +71,6 @@ class TwoSampleTest
       freq2 = input_data2.count{|num| num >= lower && num < upper } / n2.to_f
       output2[ (lower + upper) / 2.0] = (freq2 * 200).round
     end
-    p "histograms:"
-    p output1
-    p output2
     [output1, output2]
   end
 

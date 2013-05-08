@@ -1,6 +1,6 @@
-$(document).ready(function(){
+$(document).ready(function(){  
 
-  // $(".leaderboard").hide()
+  $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
     var input_data = $("#textarea").val()
 
@@ -93,7 +93,7 @@ $(document).ready(function(){
         draw(data.histogram_values, data.histogram_intervals)
       }
     })
-    // $(".leaderboard").slideDown()
+    $(".leaderboard").slideDown()
   })
 
 })
