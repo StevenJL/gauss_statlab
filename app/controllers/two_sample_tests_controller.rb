@@ -16,6 +16,5 @@ class TwoSampleTestsController < ApplicationController
     render :json => results
   end
 
-
 end
 

@@ -22,6 +22,6 @@ GaussLab::Application.routes.draw do
 
   match "/chisquares" => "chisquares#show"
 
-  match "/shpr-wlk-qqs" => "shapiro_wilks_qq#show"
+  match "/shpr-wlk-qqs" => "shapiro_wilks_qqs#show"
 
 end

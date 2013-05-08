@@ -4,6 +4,7 @@
   <title>Gauss Statistics Laboratory</title>
   <%= stylesheet_link_tag "application", :media => "all" %>
   <%= javascript_include_tag "application" %>
+  <%= yield :javascript_includes %>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -29,7 +30,8 @@
           <li><a href="/one_way_anovas">One Way ANOVA</a></li>
           <!-- <li><a href="/chisquares">Chi Square Test</a></li> -->
           <li><a href="/linear_regressions">Simple Linear Regression</a></li>
-          <li><%= link_to "Sampling from Distributions", root_url %></li>          
+          <li><a href="/shpr-wlk-qqs">Shapiro-Wilks QQ-Plot</a></li>
+          <!-- <li><%= link_to "Sampling from Distributions", root_url %></li>           -->
           <!-- <li class="nav-header">Linear Algebra</li>   -->
        </ul>  
       </div> 

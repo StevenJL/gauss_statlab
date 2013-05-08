@@ -13,4 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require twitter/bootstrap
-//= require_tree .
+//= require d3.v3.js
+//= require jstat-1.0.0.min.js
+//= require d3.qq.v0.js
+//= require d3.linear_regression.js
+//= require d3.box.js
+//= require shapiro-wilk.js
