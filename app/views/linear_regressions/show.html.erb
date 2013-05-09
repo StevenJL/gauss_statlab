@@ -2,12 +2,63 @@
   <%= javascript_include_tag "linear_regression.js" %>
 <% end %>
 
+<div id="reg-line-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Regression Line</h5>  
+    <p> The regression line is the line which best fits data in the sense
+      that it minimizes the sum of the squares of the residuals.
+    </p>
+    <p> It's calculated as follows: The slope is 
+        \[ r \frac{s_y}{s_x} \]
+        and the intercept is found by setting the line so that it
+        goes through the point of averages \[ (\bar x , \bar y) \]
+    </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="reg-line-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Regression Line</h5>  
+    <p> The regression line is the line which best fits data in the sense
+      that it minimizes the sum of the squares of the residuals.
+    </p>
+    <p> It's calculated as follows: The slope is 
+        \[ r \frac{s_y}{s_x} \]
+        and the intercept is found by setting the line so that it
+        goes through the point of averages \[ (\bar x , \bar y) \]
+    </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="correlation-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Correlation</h5>  
+    <p> The correlation between two sets of data measures the strength
+      of the linear relationship between them.  Correlation values range
+      from -1 to 1, with -1 and 1 indicating an absolute linear relationship
+      and 0 indicating no linear relationship.
+    </p>
+    <p> It's calculated as follows: 
+        \[ \sum_{i=1}^{n} \frac{x_i - \bar x}{s_x} \frac{y_i - \bar y}{s_y} \]
+    </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span5">
       <table cellpadding="10">
-        <tr><td class="stat-label">Regression Line:</td><td id="reg_line"></td></tr>
-        <tr><td class="stat-label">Correlation:</td><td id="corr"></td></tr>
+        <tr><td data-toggle="modal" href="#reg-line-modal" class="stat-label-modal" >Regression Line:</td><td id="reg_line"></td></tr>
+        <tr><td data-toggle="modal" href="#correlation-modal" class="stat-label-modal" >Correlation:</td><td id="corr"></td></tr>
       </table>
       <table>
         <tr><td style="padding-top: 25px;"><h4>Predict Response Values</h4> </td></tr>   
@@ -35,7 +86,6 @@
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">
             Enter the data sets
-            <span class="stat-label">Instructions</span>
           </div>  
         </div>   
 
