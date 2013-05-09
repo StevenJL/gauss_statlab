@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     $('.graph').empty()
 
-    $("#w-stat").html(ShapiroWilkW(input_data_num))
+    $("#w-stat").html(ShapiroWilkW(input_data_num).toFixed(2))
 
     var draw = function(input) { 
       // debugger

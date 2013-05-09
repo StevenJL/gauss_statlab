@@ -2,15 +2,52 @@
   <%= javascript_include_tag "two_sample_test.js" %>
 <% end %>
 
+<div id="df-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Degree of Freedom</h5>  
+    <p>The degree of freedom specifies the t-distribution to be used.</p>
+    <p>It's calculated from \[ n_1 + n_2 - 2  \]</p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="t-stat-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>T Test-Statistic</h5>  
+    <p>The t distribution to used in a two sample test of equal means where 
+       the population standard deviations are unknown and need to be estimated
+       from the samples. </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="p-value-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>P-Value</h5>  
+    <p>The p-value is calculated from the test-statistic.  Namely, it's the probability
+      of observing this statistic or more extreme values assuming there is no difference
+      in the population means. </p>
+    <p>If the p-value is small (less than 5% usually), we reject the hypothesis that the
+      underlying two populations have equal means.</p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span4">
       <table>
         <tr><td class="stat-label">Sample 1 Size:</td><td id="n1"></td></tr>
         <tr><td class="stat-label">Sample 2 Size:</td><td id="n2"></td></tr>      
-        <tr><td class="stat-label">Degrees of Freedom:</td><td id="df"></td></tr>
-        <tr><td class="stat-label">T Test-Statistic:</td><td id="t-stat"></td></tr>
-        <tr><td class="stat-label">P-Value:</td><td id="p-val"></td></tr>
+        <tr><td data-toggle="modal" href="#df-modal" class="stat-label-modal" >Degrees of Freedom:</td><td id="df"></td></tr>
+        <tr><td data-toggle="modal" href="#t-stat-modal" class="stat-label-modal" >T Test-Statistic:</td><td id="t-stat"></td></tr>
+        <tr><td data-toggle="modal" href="#p-value-modal" class="stat-label-modal" >P-Value:</td><td id="p-val"></td></tr>
       </table>
     </div>
     <div class="span6 graph">
@@ -28,9 +65,8 @@
       <fieldset>
         <div class="row offset1"><h4>Two Sample T-Test</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
-          <div class="span10">
-            Enter the data sets
-            <span class="stat-label">Instructions</span>
+          <div class="span10">          
+            <div>Enter the data sets.</div>
           </div>  
         </div>   
         <div class="control-group">  
