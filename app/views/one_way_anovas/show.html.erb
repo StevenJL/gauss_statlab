@@ -2,15 +2,41 @@
   <%= javascript_include_tag "anova.js" %>
 <% end %>
 
+<div id="p-value-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>P-Value</h5>  
+    <p>The p-value is calculated from the test-statistic.  Namely, it's the probability
+      of observing this statistic or more extreme values assuming there is no difference
+      in the population means. </p>
+    <p>If the p-value is small (less than 5% usually), we reject the hypothesis that the
+      underlying two populations have equal means.</p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="f-stat-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>F-statistic</h5>  
+    <p> In One Way Anova, the statistic is derived from variance calculations.
+        Namely, the within group variance, between group variance and the total variance, hence
+        ANOVA = analysis of variance.  This test-statistic follows an F-distribution.
+        In fact, a F random variable is a T random variable squared.</p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span12">
       <table>
-        <tr><td class="stat-label">F-Statistic:</td><td id="f-stat"></td>
+        <tr><td data-toggle="modal" href="#f-stat-modal" class="stat-label-modal" >F-Statistic:</td><td id="f-stat"></td>
             <td></td>
-            <td class="stat-label">P-Value:</td><td id="p-value"></td>
-            <td></td>      
-            <td class="stat-label">Sum of Squares Total:</td><td id="sst"></tr>
+            <td data-toggle="modal" href="#p-value-modal" class="stat-label-modal" >P-Value:</td><td id="p-value"></td>
+        </tr>
       </table>
     </div>
       <div class="span12 graph"></div>
