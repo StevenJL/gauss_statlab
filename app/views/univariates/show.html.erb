@@ -3,9 +3,37 @@
 <% end %>
 
 <div id="samp_std" class="modal hide fade in" style="display: none; ">  
-  <div class="modal-body">   
-    <p>This is the unbiased estimate of the population standard deviation.</p>
-    <p>It's calculated from the formula: </p>
+  <div class="modal-body"> 
+    <h5>Sample SD</h5>  
+    <p>This is the unbiased estimate of the population standard deviation from your sample.</p>
+    <p>It's calculated from the formula: \[ \sqrt{\frac{1}{n-1}\sum_{i=1}^{n} (x_i - \bar x)^2} \] </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="sigma-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Population SD</h5>  
+    <p>This is the standard deviation of the sample.  It's as if we're assuming the sample is the population.</p>
+    <p>It's calculated from the formula: \[ \sqrt{\frac{1}{n}\sum_{i=1}^{n} (x_i - \bar x)^2} \] </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+<div id="kurtosis-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Kurtosis</h5>  
+    <p>Measures the "skewness" of the distribution.<br> 
+      kurtosis = 0, means the data distribution is symmetric.<br>
+      kurtosis < 0, means the data distribution is symmetric.<br>
+      kurtosis > 0, means the data distribution is symmetric.<br>
+      </p>
+    <p>It's calculated from the fourth standardized moment about the mean: \[  \frac{\sum{i=1}^{n} (y_i - \bar y)^4}{(n-1)s} \] 
+       where <em>s</em> is the sample standard deviation.</p>
   </div>  
   <div class="modal-footer">    
     <a href="#" class="btn" data-dismiss="modal">Close</a>  
@@ -24,11 +52,11 @@
         <tr><td class="stat-label">Third Quartile:</td><td id="third_qart"></td></tr>
         <tr><td class="stat-label">Max:</td><td id="max"></td></tr>
         <tr><td data-toggle="modal" href="#samp_std" class="stat-label-modal">Sample SD:</td><td id="s"></td></tr>
-        <tr><td data-toggle="modal" href="#sigma" class="stat-label-modal">Pop. SD:</td><td id="sigma"></td></tr>
+        <tr><td data-toggle="modal" href="#sigma-modal" class="stat-label-modal">Pop. SD:</td><td id="sigma"></td></tr>
         <tr><td class="stat-label">Sample Variance:</td><td id="samp_var"></td></tr>
         <tr><td class="stat-label">Pop. Variance:</td><td id="pop_var"></td></tr>
         <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
-        <tr><td class="stat-label">Kurtosis:</td><td id="kurt"></td></tr>
+        <tr><td data-toggle="modal" href="#kurtosis-modal" class="stat-label-modal">Kurtosis:</td><td id="kurt"></td></tr>
       </table>
     </div>
     <div class="span6 graph">  
@@ -50,7 +78,6 @@
             Enter Data your data set by pasting it in the text field below
             to compute basic univariate statistics on the data set 
             (ie. mean, median, sd, quartiles, kurtosis, etc.)
-            <span class="stat-label">Instructions</span>
           </div>
           
         </div>   

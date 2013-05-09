@@ -44,3 +44,6 @@ gem "twitter-bootstrap-rails"
 gem 'debugger'
 
 gem 'statsample'
+
+gem 'mathjax-rails'
+

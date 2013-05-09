@@ -24,5 +24,7 @@ GaussLab::Application.routes.draw do
 
   match "/confidence_intervals" => "confidence_intervals#show"
 
+  mathjax 'mathjax'
+
 end
 
