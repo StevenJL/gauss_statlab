@@ -5,7 +5,6 @@ $(document).ready(function(){
     var input_data = $("#textarea").val()
 
     var draw = function(hist_values, hist_interval){
-
       var min = hist_interval[0]
       var max = hist_interval[0]
 
@@ -17,6 +16,18 @@ $(document).ready(function(){
           max = hist_interval[i]
         }
       }
+
+      var max_height = hist_values[0]
+
+      for(i = 0; i < hist_values.length; i++){
+        if (hist_values[i] > max_height){
+          max_height = hist_values[i]
+        }
+      }      
+
+      var scale = 300 / max_height
+
+      debugger
 
       var dataset = hist_values;
       var range = max - min;
@@ -45,11 +56,11 @@ $(document).ready(function(){
           return i * (w / dataset.length)
         })
         .attr("y", function(d){
-          return h - d * 10
+          return h - d * scale
         })
         .attr("width", w / dataset.length - barPadding)
         .attr("height", function(d){
-          return d * 10;
+          return d * scale;
         })
 
       var svg2 = d3.select('.graph')
