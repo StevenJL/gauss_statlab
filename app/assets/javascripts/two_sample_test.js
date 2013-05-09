@@ -98,6 +98,7 @@ $(document).ready(function(){
 
     $.ajax({
       url: '/two_sample_test/compute',
+      type: 'POST',
       data: { sample1: sample1, sample2: sample2, test_type: test_type, equal_var: equal_var },
       success: function(data){
         $("#n1").html(data.n1)

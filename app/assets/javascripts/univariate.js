@@ -74,6 +74,7 @@ $(document).ready(function(){
 
     $.ajax({
       url: '/univariate/compute',
+      type: 'POST',
       data: { input_data: input_data },
       success: function(data){
         $("#n").html(data.n)

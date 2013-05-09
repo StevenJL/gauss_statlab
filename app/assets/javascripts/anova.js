@@ -16,6 +16,7 @@ $(document).ready(function(){
       }
     $.ajax({
       url: '/one_way_anovas/compute',
+      type: 'POST',
       data: { data_sets_array: data_sets_array },
       success: function(results){
         var Fstat = results.f

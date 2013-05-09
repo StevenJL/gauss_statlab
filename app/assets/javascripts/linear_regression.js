@@ -85,6 +85,7 @@ $(document).ready(function(){
 
     $.ajax({
       url: '/linear_regressions/compute',
+      type: 'POST',
       data: { dataset : dataset },
       success: function(results){
         var a = results.a.toFixed(2)
