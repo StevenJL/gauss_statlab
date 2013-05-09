@@ -76,6 +76,7 @@ GEM
     minimization (0.2.1)
       text-table (~> 1.2)
     multi_json (1.7.2)
+    pg (0.15.1)
     polyglot (0.3.3)
     prawn (0.8.4)
       prawn-core (>= 0.8.4, < 0.9)
@@ -177,6 +178,7 @@ DEPENDENCIES
   less
   less-rails
   mathjax-rails
+  pg
   rails (= 3.2.13)
   sass-rails (~> 3.2.3)
   sqlite3
