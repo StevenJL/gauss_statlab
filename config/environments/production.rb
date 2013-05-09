@@ -66,5 +66,10 @@ GaussLab::Application.configure do
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
   config.assets.precompile += ['univariate.js']
+  config.assets.precompile += ['anova.js']
+  config.assets.precompile += ['linear_regression.js']
+  config.assets.precompile += ['shapiro-wilk.js']
+  config.assets.precompile += ['shapiro_wilks.js']
+  config.assets.precompile += ['two_sample_test.js']
 
 end
