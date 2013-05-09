@@ -11,7 +11,7 @@ $(document).ready(function(){
 
     $('.graph').empty()
 
-    $("#w-stat").html(ShapiroWilkW(input_data_num).toFixed(2))
+    $("#w-stat").html(ShapiroWilkW(input_data_num).toFixed(4))
 
     var draw = function(input) { 
       // debugger
@@ -67,7 +67,7 @@ $(document).ready(function(){
               {
                 x: d3.range(n).map(normal1(tm, td)),
                 y: raw_percentiles,
-                label: "Gaussian (Normal) Distribution"
+                // label: "Gaussian (Normal) Distribution"
               }
               // {
               //   x: d3.range(n).map(normal3(dd)),

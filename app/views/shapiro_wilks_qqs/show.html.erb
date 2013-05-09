@@ -2,6 +2,28 @@
   <%= javascript_include_tag "shapiro_wilks.js" %>
 <% end %>
 
+<div id="shpr-wlk-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Shapiro-Wilks Test</h5>  
+    <p> The Shapiro-Wilks Test takes a set of numbers randomly sampled
+      from a population and answers the question of whether or not
+      the underlying population follows a normal distribution.  The normal
+      distribution can be described loosely as a set of numbers whose histogram is "bell shaped"
+      but a more precise definition is that it's <em>probability density function</em> is of the form
+      \[  f(x) = \frac{1}{\sqrt{2\pi \sigma ^ 2}} e^{ - \frac{(x- \mu)^2}{2 \sigma ^ 2} } \]
+    </p>
+    <p>
+      An example of when we want to know if a set of numbers come from an underlying
+      population that is normal is in linear regression.  Namely, one of the assumptions
+      in linear regression is that the residuals are normally distributed.
+    </p>
+    <a href="http://en.wikipedia.org/wiki/Shapiro%E2%80%93Wilk_test">For more information on the Shapiro-Wilks Test</a>    
+  </div>
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span4">
@@ -23,7 +45,7 @@
   <div class="span12">
     <form class="form-horizontal">  
       <fieldset>
-        <div class="row offset1"><h4>Shapiro-Wilks Test with QQ-Plot</h4></div>
+        <div class="row offset1"><h4 data-toggle="modal" href="#shpr-wlk-modal" class="title-label-modal" >Shapiro-Wilks Test with QQ-Plot</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">
             Enter Data your data set by pasting it in the text field below

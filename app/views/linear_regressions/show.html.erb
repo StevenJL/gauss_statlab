@@ -53,6 +53,25 @@
   </div>  
 </div>
 
+<div id="linreg-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Simple Linear Regression</h5>  
+    <p> Simple linear regression is the process of finding the line
+      which "best fits" a scatterplot.  The definition of best fit here
+      is the line which minimizes the sum of the errors squared. One
+      application of linear regression is for prediction.</p>
+    <p>For example a property management firm can model the relationship between
+      the rental price of a unit and the total square feet with linear regression
+      (assuming that is the underlying relationship) and use the model to price units.
+    </p>
+    <a href="http://en.wikipedia.org/wiki/Linear_regression">For more information on simple linear regression</a>    
+  </div>
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span5">
@@ -82,7 +101,7 @@
   <div class="span12">
     <form class="form-horizontal">  
       <fieldset>
-        <div class="row offset1"><h4>Simple Linear Regresion</h4></div>
+        <div class="row offset1"><h4 data-toggle="modal" href="#linreg-modal" class="title-label-modal" >Simple Linear Regresion</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">
             Enter the data sets
