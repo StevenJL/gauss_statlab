@@ -39,6 +39,24 @@
   </div>  
 </div>
 
+<div id="t-test-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Two Sample t-test</h5>  
+    <p>The two sample t-test tests takes two random samples drawn from two
+      different populations and asks whether or not the mean of these populations
+      are equal, or if one is less than the other.</p>
+    <p>For example, a medical researcher may ask if a new blood pressure
+      reduction drug is more effective than the current drug.  The two samples
+      can be a group of randomly assigned patients on the old drug and
+      a group of randomly assigned patients on the new drug.
+    </p>
+    <a href="http://en.wikipedia.org/wiki/Student's_t-test">For more information on the t-test</a>    
+  </div>
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span4">
@@ -63,7 +81,7 @@
   <div class="span12">
     <form class="form-horizontal">  
       <fieldset>
-        <div class="row offset1"><h4>Two Sample T-Test</h4></div>
+        <div class="row offset1"><h4 data-toggle="modal" href="#t-test-modal" class="title-label-modal" >Two Sample T-Test</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">          
             <div>Enter the data sets.</div>

@@ -8,19 +8,30 @@ $(document).ready(function(){
     var test_type = $('#test_type').val()
     var equal_var = $('#equal_var').val()
 
-    var draw = function(hist1_values, hist1_intervals, hist2_values, hist2_intervals){
-
-      var min = hist1_intervals[0]
-      var max = hist1_intervals[0]
-
-      for(i = 0; i < hist1_intervals.length; i++){
-        if(hist1_intervals[i] < min){
-          min = hist1_intervals[i]
-        }
-        if (hist1_intervals[i]>max){
-          max = hist1_intervals[i]
+    var get_min = function(array){
+      var min = array[0]
+      for(i = 0; i < array.length; i++){
+        if(array[i] < min){
+          min = array[i]
         }
       }
+      return min
+    }
+
+    var get_max = function(array){
+      var max = array[0]
+      for(i = 0; i < array.length; i++){
+        if(array[i] > max){
+          max = array[i]
+        }
+      }
+      return max
+    }
+
+    var draw = function(hist1_values, hist1_intervals, hist2_values, hist2_intervals){
+
+      var min = get_min(hist1_intervals)
+      var max = get_max(hist1_intervals)
 
       var range = max - min;
       var tick_width = range / 7.0;
@@ -29,11 +40,16 @@ $(document).ready(function(){
         axis.push((min + i * tick_width).toFixed(0) )
       }
 
+      var max_height1 = get_max(hist1_values)
+      var max_height2 = get_max(hist2_values)
+
       var dataset1 = hist1_values
       var dataset2 = hist2_values
 
       var w = 300
       var h = 100
+      var scale1 = h / max_height1
+      var scale2 = h / max_height2
       var barPadding = 1;
       var svg = d3.select('.graph')
                     .append("svg")
@@ -49,11 +65,11 @@ $(document).ready(function(){
           return i * (w / dataset1.length)
         })
         .attr("y", function(d){
-          return h - d * 4
+          return h - d * scale1
         })
         .attr("width", w / dataset1.length - barPadding)
         .attr("height", function(d){
-          return d * 4;
+          return d * scale1;
         })
 
       var svg4 = d3.select('.graph')
@@ -90,7 +106,7 @@ $(document).ready(function(){
         .attr("y", 0)
         .attr("width", w / dataset2.length - barPadding)
         .attr("height", function(d){
-          return d * 4;
+          return d * scale2;
         })
 
     }

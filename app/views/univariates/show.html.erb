@@ -40,6 +40,20 @@
   </div>  
 </div>
 
+<div id="univariates-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>Univariate Statistics</h5>  
+    <p>Univariate means "one variable" and in this context, it means just one set of
+      numbers.  It's usually a random sample collected from an underlying population or
+      it could be the population itself.  Univariate statistics include the mean,
+      median, standard deviation, kurtosis, etc.  These numbers give us an overall understanding of
+      the center, spread and shape of the numbers.</p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span4">
@@ -72,13 +86,12 @@
   <div class="span12">
     <form class="form-horizontal">  
       <fieldset>
-        <div class="row offset1"><h4>Univariate Statistics</h4></div>
+        <div class="row offset1"><h4 data-toggle="modal" href="#univariates-modal" class="title-label-modal" >Univariate Statistics</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">
             Enter Data your data set by pasting it in the text field below
             to compute basic univariate statistics on the data set.
-            The histogram will not render correctly if there are fewer
-            than seven unique numbers.
+            The histogram looks best with more numbers.
           </div>
           
         </div>   

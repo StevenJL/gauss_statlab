@@ -19,3 +19,11 @@ text-align: right;
 text-decoration: underline;
 color: rgb(0,0,255);
 }
+
+.title-label-modal
+{
+cursor: hand; cursor: pointer;
+font-weight: bold;
+text-decoration: underline;
+color: rgb(0,0,255);
+}

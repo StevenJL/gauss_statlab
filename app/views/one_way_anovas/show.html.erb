@@ -29,6 +29,30 @@
   </div>  
 </div>
 
+<div id="anova-modal" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body"> 
+    <h5>ANOVA</h5>  
+    <p>ANOVA is short for "Analysis of Variance" (variance is a measure of
+      spread; it's the square of standard deviation). ANOVA is a generalization
+      of the two sample t-test.  Instead of testing whether or not two
+      populations have equal means from their samples, ANOVA simultaneously
+      tests multiple populations. It does this by inferring on three 
+      variance calculations: within group variance, between group variance
+      and total variance.  Note ANOVA can only test whether or not the means of a 
+      set of populations are equal.  We need to do more work to determine
+      which population(s) has greater mean(s). </p>
+    <p>For example, a medical researcher may ask if a new set of blood pressure
+      reduction drugs is more effective than the current drug.  The groups here 
+      can be randomly assigned patients on the old drug and 
+      groups of randomly assigned patients on the new drugs.
+    </p>
+    <a href="http://en.wikipedia.org/wiki/Analysis_of_variance">For more information on ANOVA</a>    
+  </div>
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span12">
@@ -50,7 +74,7 @@
   <div class="span12">
     <form class="form-horizontal">  
       <fieldset>
-        <div class="row offset1"><h4>One Way ANOVA</h4></div>
+        <div class="row offset1"><h4 data-toggle="modal" href="#anova-modal" class="title-label-modal" >One Way ANOVA</h4></div>
         <div class="row offset1" style="padding: 20px; margin-left: 50px; padding-bottom: 30px;" >
           <div class="span10">
             Enter you data in the fields below.  You can also add groups with the "add group" button.
