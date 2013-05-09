@@ -22,5 +22,7 @@ GaussLab::Application.routes.draw do
 
   match "/shpr-wlk-qqs" => "shapiro_wilks_qqs#show"
 
+  match "/confidence_intervals" => "confidence_intervals#show"
+
 end
 

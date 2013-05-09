@@ -2,6 +2,16 @@
   <%= javascript_include_tag "univariate.js" %>
 <% end %>
 
+<div id="samp_std" class="modal hide fade in" style="display: none; ">  
+  <div class="modal-body">   
+    <p>This is the unbiased estimate of the population standard deviation.</p>
+    <p>It's calculated from the formula: </p>
+  </div>  
+  <div class="modal-footer">    
+    <a href="#" class="btn" data-dismiss="modal">Close</a>  
+  </div>  
+</div>
+
 <div class="leaderboard results">  
   <div class="row-fluid">
     <div class="span4">
@@ -13,8 +23,8 @@
         <tr><td class="stat-label">Median:</td><td id="median"></td></tr>
         <tr><td class="stat-label">Third Quartile:</td><td id="third_qart"></td></tr>
         <tr><td class="stat-label">Max:</td><td id="max"></td></tr>
-        <tr><td class="stat-label">Sample SD:</td><td id="s"></td></tr>
-        <tr><td class="stat-label">Pop. SD:</td><td id="sigma"></td></tr>
+        <tr><td data-toggle="modal" href="#samp_std" class="stat-label-modal">Sample SD:</td><td id="s"></td></tr>
+        <tr><td data-toggle="modal" href="#sigma" class="stat-label-modal">Pop. SD:</td><td id="sigma"></td></tr>
         <tr><td class="stat-label">Sample Variance:</td><td id="samp_var"></td></tr>
         <tr><td class="stat-label">Pop. Variance:</td><td id="pop_var"></td></tr>
         <tr><td class="stat-label">Sum of Squares:</td><td id="ss"></td></tr>
