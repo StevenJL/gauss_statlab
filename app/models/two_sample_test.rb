@@ -56,16 +56,16 @@ class TwoSampleTest
     bins2 = [input_data2.uniq.size, 30].min
     min = [input_data1.min, input_data2.min].min
     max = [input_data1.max, input_data2.max].max
-    range = max - min
+    range = max - min + 1
     width1 = range / bins1.to_f
     width2 = range / bins2.to_f
-    (bins1+1).times do |i|
+    (bins1).times do |i|
       lower = min - (width1/2.0) + width1*i 
       upper = min + (width1/2.0) + width1*i
       freq1 = input_data1.count{|num| num >= lower && num < upper } / n1.to_f
       output1[ (lower + upper) / 2.0] = (freq1 * 200).round
     end
-    (bins2+1).times do |i|
+    (bins2).times do |i|
       lower = min - (width2/2.0) + width2*i 
       upper = min + (width2/2.0) + width2*i
       freq2 = input_data2.count{|num| num >= lower && num < upper } / n2.to_f
