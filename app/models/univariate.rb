@@ -33,10 +33,10 @@ class Univariate
     bins = [input_data.uniq.size, 20].min
     min = input_data.min
     max = input_data.max
-    range = max - min
+    range = max - min + 1
     width = range / bins.to_f
     
-    (bins+1).times do |i|
+    (bins).times do |i|
       lower = min - (width/2.0) + width*i 
       upper = min + (width/2.0) + width*i
       freq = input_data.count{|num| num >= lower && num < upper } / n.to_f

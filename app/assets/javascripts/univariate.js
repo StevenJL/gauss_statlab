@@ -1,10 +1,9 @@
 $(document).ready(function(){  
 
   $(".leaderboard").hide()
-  $("#compute-button").on('click', function(){
-    var input_data = $("#textarea").val()
 
     var draw = function(hist_values, hist_interval){
+      console.log(hist_values)
       var min = hist_interval[0]
       var max = hist_interval[0]
 
@@ -27,14 +26,12 @@ $(document).ready(function(){
 
       var scale = 300 / max_height
 
-      debugger
-
       var dataset = hist_values;
       var range = max - min;
       var tick_width = range / 7.0;
       var axis = [];
       for(i=0 ;i<8 ;i++){
-        axis.push((min + i * tick_width).toFixed(0) )
+        axis.push((min + i * tick_width).toFixed(1) )
       }
 
       var w = 300;
@@ -68,8 +65,6 @@ $(document).ready(function(){
                     .attr("width", 300)
                     .attr("height", 25);
 
-      // debugger
-
       svg2.selectAll("text")                   
         .data(axis)
         .enter()
@@ -78,12 +73,17 @@ $(document).ready(function(){
           return d
         })
         .attr("x", function(d, i){
-          return i *  (300 / 7) ;
+          return i *  (265 / 7) ;
         })
         .attr("y", 25);  
     }
 
-    $.ajax({
+
+  $("#compute-button").on('click', function(){
+
+    var input_data = $("#textarea").val()
+
+      $.ajax({
       url: '/univariate/compute',
       type: 'POST',
       data: { input_data: input_data },
@@ -104,8 +104,10 @@ $(document).ready(function(){
         $(".graph").empty()
         draw(data.histogram_values, data.histogram_intervals)
       }
-    })
-    $(".leaderboard").slideDown()
+      })
+      $(".leaderboard").slideDown();
+    
+    
   })
 
 })

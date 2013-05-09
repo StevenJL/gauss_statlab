@@ -2,7 +2,7 @@ $(document).ready(function(){
 
   $(".leaderboard").hide()
   $("#compute-button").on('click', function(){
-    var canvas = $()
+    $(".graph").empty()
     var sample1 = $("#textarea1").val()
     var sample2 = $("#textarea2").val()
     var test_type = $('#test_type').val()

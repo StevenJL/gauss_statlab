@@ -1,19 +1,10 @@
 $(document).ready(function(){
 
   $(".leaderboard").hide()
-  $("#compute-button").on('click', function(){
-
-    $(".graph").empty()
-
-    var response = $("#textarea1").val().split(',')
-    var predictor = $("#textarea2").val().split(',')
-
-    var dataset = [];                   
-    var numDataPoints = response.length;              
-    for (var i = 0; i < numDataPoints; i++) {                
-        dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]); }
 
     var draw = function(dataset, a, b){
+
+      $(".graph").empty()
 
       var a = parseFloat(a);
       var b = parseFloat(b);
@@ -79,29 +70,42 @@ $(document).ready(function(){
           .attr("class", "axis")
           .attr("transform", "translate(" + padding + ",0)")
           .call(yAxis);
-
-
     }
 
-    $.ajax({
-      url: '/linear_regressions/compute',
-      type: 'POST',
-      data: { dataset : dataset },
-      success: function(results){
-        var a = results.a.toFixed(2)
-        var b = results.b.toFixed(2)
-        $("#reg_line").html("y = "+a+" + "+b+"x")
-        $("#corr").html(results.r.toFixed(2))
-        draw(dataset, a, b)
-        $("#predict-button").on("click",function(){
-          var x_to_predict = $("#x_value").val()
-          x_to_predict = parseFloat(x_to_predict)
-          var y_predicted = parseFloat(a) + parseFloat(b) * x_to_predict
-          $("#predicted_y").html(y_predicted.toFixed(2))
-        })
-      }
-    })
+  $("#compute-button").on('click', function(){
 
-    $(".leaderboard").slideDown()
+
+      var response = $("#textarea1").val().split(',')
+      var predictor = $("#textarea2").val().split(',')
+
+      if (response.length != predictor.length){
+        alert("Response and Predictor must be equal length")
+      }else{
+        var dataset = [];                   
+        var numDataPoints = response.length;              
+        for (var i = 0; i < numDataPoints; i++) {                
+            dataset.push([parseFloat(response[i]), parseFloat(predictor[i])]); 
+        }
+
+        $.ajax({
+          url: '/linear_regressions/compute',
+          type: 'POST',
+          data: { dataset : dataset },
+          success: function(results){
+            var a = results.a.toFixed(2)
+            var b = results.b.toFixed(2)
+            $("#reg_line").html("y = "+a+" + "+b+"x")
+            $("#corr").html(results.r.toFixed(2))
+            draw(dataset, a, b)
+            $("#predict-button").on("click",function(){
+              var x_to_predict = $("#x_value").val()
+              x_to_predict = parseFloat(x_to_predict)
+              var y_predicted = parseFloat(a) + parseFloat(b) * x_to_predict
+              $("#predicted_y").html(y_predicted.toFixed(2))
+            })
+          }
+        })
+        $(".leaderboard").slideDown()
+      }
   })
 })
